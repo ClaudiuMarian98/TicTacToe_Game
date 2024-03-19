@@ -2,8 +2,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
+import java.util.*;
 
 public class TicTacToe implements ActionListener{
+	int flag=0;
+	
+	
 	
 	Random random= new Random();
 	JFrame frame= new JFrame();
@@ -40,7 +44,10 @@ public class TicTacToe implements ActionListener{
 			buttons[i].setFont(new Font("MV Boli",Font.BOLD,120));
 			buttons[i].setFocusable(false);
 			buttons[i].addActionListener(this);
+			
 		}
+		
+		
 		
 		title_panel.add(textfield);
 		frame.add(button_panel);
@@ -49,9 +56,12 @@ public class TicTacToe implements ActionListener{
 		firstTurn();
 		
 	}
+	
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+	
 		for(int i=0;i<9;i++)
 			{
 				if(e.getSource()==buttons[i])
@@ -65,6 +75,9 @@ public class TicTacToe implements ActionListener{
 									player1_turn=false;
 									textfield.setText("O turn");
 									check();
+									checkDraw();
+									
+									
 								}
 							}
 						else
@@ -76,11 +89,22 @@ public class TicTacToe implements ActionListener{
 								player1_turn=true;
 								textfield.setText("X turn");
 								check();
+								checkDraw();
+								
+								
 							}
 							}
 					}
+				
+				
 			}
+		
+		
 	}
+	
+	
+	
+
 	
 	
 	public void firstTurn()
@@ -91,6 +115,7 @@ public class TicTacToe implements ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		if(random.nextInt(2)==0)
 		{
 			player1_turn=true;
@@ -107,7 +132,8 @@ public class TicTacToe implements ActionListener{
 	}
 	
 	public void check()
-	{
+	{ 
+		
 		if((buttons[0].getText()=="X") &&
 		   (buttons[1].getText()=="X") && 
 		   (buttons[2].getText()=="X") )
@@ -115,15 +141,17 @@ public class TicTacToe implements ActionListener{
 	
 					{
 						xWins(0,1,2);
+						
 					}
 		
-		if((buttons[0].getText()=="X") &&
-		   (buttons[1].getText()=="X") && 
-		   (buttons[2].getText()=="X") )
+		if((buttons[3].getText()=="X") &&
+		   (buttons[4].getText()=="X") && 
+		   (buttons[5].getText()=="X") )
 						
 					
 					{
 						xWins(3,4,5);
+						
 					}
 				
 		
@@ -134,6 +162,7 @@ public class TicTacToe implements ActionListener{
 					
 					{
 						xWins(6,7,8);
+						
 					}
 		
 		if((buttons[0].getText()=="X") &&
@@ -143,6 +172,7 @@ public class TicTacToe implements ActionListener{
 					
 					{
 						xWins(0,3,6);
+						
 					}
 			
 		if((buttons[1].getText()=="X") &&
@@ -152,6 +182,7 @@ public class TicTacToe implements ActionListener{
 						
 						{
 							xWins(1,4,7);
+							
 						}
 		if((buttons[2].getText()=="X") &&
 				(buttons[5].getText()=="X") && 
@@ -160,6 +191,7 @@ public class TicTacToe implements ActionListener{
 						
 						{
 							xWins(2,5,8);
+						
 						}
 				
 		if((buttons[0].getText()=="X") &&
@@ -169,6 +201,7 @@ public class TicTacToe implements ActionListener{
 						
 						{
 							xWins(0,4,8);
+							
 						}
 				
 		if((buttons[2].getText()=="X") &&
@@ -178,6 +211,7 @@ public class TicTacToe implements ActionListener{
 						
 						{
 							xWins(2,4,6);
+							
 						}
 		
 				////////
@@ -191,6 +225,7 @@ public class TicTacToe implements ActionListener{
 			
 							{
 								oWins(0,1,2);
+								
 							}
 				
 				if((buttons[0].getText()=="O") &&
@@ -200,6 +235,7 @@ public class TicTacToe implements ActionListener{
 							
 							{
 								oWins(3,4,5);
+								
 							}
 						
 				
@@ -210,6 +246,7 @@ public class TicTacToe implements ActionListener{
 							
 							{
 								oWins(6,7,8);
+								
 							}
 				
 				if((buttons[0].getText()=="O") &&
@@ -219,6 +256,7 @@ public class TicTacToe implements ActionListener{
 							
 							{
 								oWins(0,3,6);
+								
 							}
 					
 				if((buttons[1].getText()=="O") &&
@@ -228,6 +266,7 @@ public class TicTacToe implements ActionListener{
 								
 								{
 									oWins(1,4,7);
+									
 								}
 				if((buttons[2].getText()=="O") &&
 						(buttons[5].getText()=="O") && 
@@ -236,6 +275,7 @@ public class TicTacToe implements ActionListener{
 								
 								{
 									oWins(2,5,8);
+									
 								}
 						
 				if((buttons[0].getText()=="O") &&
@@ -245,6 +285,7 @@ public class TicTacToe implements ActionListener{
 								
 								{
 									oWins(0,4,8);
+									
 								}
 						
 				if((buttons[2].getText()=="O") &&
@@ -254,9 +295,10 @@ public class TicTacToe implements ActionListener{
 								
 								{
 									oWins(2,4,6);
+									
 								}
-						
-
+				
+				
 
 	}
 	
@@ -271,6 +313,9 @@ public class TicTacToe implements ActionListener{
 			buttons[i].setEnabled(false);
 		}
 		textfield.setText("X wins");
+		
+		flag++;
+		
 	}
 	
 	public void oWins(int a,int b,int c) {
@@ -284,8 +329,30 @@ public class TicTacToe implements ActionListener{
 			buttons[i].setEnabled(false);
 		}
 		textfield.setText("O wins");
+		
+		flag++;
 	}
 	
+	public void checkDraw() {
+        boolean allFilled = true;
+        for (int i = 0; i < 9; i++) {
+            if (buttons[i].getText().isEmpty()) {
+                allFilled = false;
+                break;
+            }
+        }
+        if (allFilled && flag == 0) {
+            draw();
+        }
+    }
+
+    public void draw() {
+        for (int i = 0; i < 9; i++) {
+            buttons[i].setBackground(Color.gray);
+            buttons[i].setEnabled(false);
+        }
+        textfield.setText("Draw");
+    }
 	
 	
 }
